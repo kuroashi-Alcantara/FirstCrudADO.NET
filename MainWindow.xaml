@@ -1,0 +1,28 @@
+﻿<Window x:Class="FirstCrudProduct.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FirstCrudProduct"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Background="AntiqueWhite">
+
+        <Label x:Name="label" FontSize="25" Content="Productos" HorizontalAlignment="Left" Margin="62,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <ListBox x:Name="productList" Margin="39,73,585,115" RenderTransformOrigin="0.514,0.524"  MouseDoubleClick="productList_MouseDoubleClick"/>
+
+        <Button x:Name="addBtn" Content="Agregar" HorizontalAlignment="Left" Margin="39,332,0,0" VerticalAlignment="Top" Height="35" Width="54" Click="addBtn_Click"/>
+        <Button x:Name="updateBtn" Content="Actualizar" HorizontalAlignment="Left" Margin="100,332,0,0" VerticalAlignment="Top" Height="35" Width="54" Click="updateBtn_Click"/>
+        <Button x:Name="deleteBtn" Content="Eliminar" HorizontalAlignment="Left" Margin="161,332,0,0" VerticalAlignment="Top" Height="35" Width="54" Click="deleteBtn_Click"/>
+
+        <ListBox x:Name="showProductList" Background="WhiteSmoke"  Margin="290,106,220,217"/>
+        <ListBox x:Name="showProductList2" Background="WhiteSmoke"  Margin="290,269,220,58"/>
+
+        <Label x:Name="label1" Content="Precio" HorizontalAlignment="Left" Margin="344,53,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="22"/>
+        <Label x:Name="label1_Copy" Content="Cantidad" HorizontalAlignment="Left" Margin="331,222,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="22"/>
+
+
+
+
+    </Grid>
+</Window>
