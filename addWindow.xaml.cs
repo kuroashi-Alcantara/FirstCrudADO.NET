@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+//ventana para agregar
 namespace FirstCrudProduct
 {
     /// <summary>
@@ -38,21 +39,66 @@ namespace FirstCrudProduct
 
         private void addWindowBtn_Click(object sender, RoutedEventArgs e)
         {
-            string consult = "INSERT INTO Products (Name,Price,Amount) VALUES (@name,@price,@amount)";
+            try
+            {
+               
+                    string consult = "INSERT INTO Products (Name,Price,Amount) VALUES (@name,@price,@amount)";
 
-            SqlCommand myCommand = new SqlCommand(consult,myConnectionSql);
+                SqlCommand myCommand = new SqlCommand(consult, myConnectionSql);
 
-            myConnectionSql.Open();
+                myConnectionSql.Open();
 
-            myCommand.Parameters.AddWithValue("@name", textAddName.Text);
-            myCommand.Parameters.AddWithValue("@price", Convert.ToDecimal(textAddPrice.Text));
-            myCommand.Parameters.AddWithValue("@amount", Convert.ToInt32(textAddAmount.Text));
 
-            myCommand.ExecuteNonQuery();
+                if (!int.TryParse(textAddName.Text, out int name))
+                {
+                    myCommand.Parameters.AddWithValue("@name", textAddName.Text);
+                }
+                else
+                {
+                    throw new FormatException("Nombre con formato incorrecto");
+                }
 
-            myConnectionSql.Close();
+                if (!decimal.TryParse(textAddPrice.Text, out decimal price))
+                {
+                    
+                    throw new FormatException("Precio con formato incorrecto");
+                }
+                else
+                {
+                    myCommand.Parameters.AddWithValue("@price", Convert.ToDecimal(textAddPrice.Text));
+                }
 
-            this.Close();
+                if (int.TryParse(textAddAmount.Text, out int amount))
+                {
+                    myCommand.Parameters.AddWithValue("@amount", Convert.ToInt32(textAddAmount.Text));
+                }
+                else
+                {
+                    throw new FormatException("Cantidad con formato incorrecto");
+                }
+
+                myCommand.ExecuteNonQuery();
+
+                myConnectionSql.Close();
+
+                this.Close();
+                
+            }
+            catch (FormatException ex)
+            {
+                MessageBox.Show("Formato incorrecto o los campos estan vacios, Error: " + ex.Message);
+            }  
+            /*catch(Exception ex)
+            {
+                MessageBox.Show("los campos estan vacios, Error: " + ex.Message);
+
+            }*/
+            finally
+            {
+                myConnectionSql.Close();
+            }
+
+
 
         }
     }
