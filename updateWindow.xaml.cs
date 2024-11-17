@@ -38,21 +38,40 @@ namespace FirstCrudProduct
 
         private void updWindowBtn_Click(object sender, RoutedEventArgs e)
         {
-            string consult = "UPDATE Products SET Name=@name, Price=@price, Amount=@amount WHERE ID="+z;
+            try
+            {
+                string consult = "UPDATE Products SET Name=@name, Price=@price, Amount=@amount WHERE ID=" + z;
 
-            SqlCommand myComand = new SqlCommand(consult,myConnectionSql);
+                SqlCommand myComand = new SqlCommand(consult, myConnectionSql);
 
-            myConnectionSql.Open();
+                myConnectionSql.Open();
 
-            myComand.Parameters.AddWithValue("@name", textUpdName.Text);
-            myComand.Parameters.AddWithValue("@price", textUpdPrice.Text);
-            myComand.Parameters.AddWithValue("@amount", textUpdAmount.Text);
+                if (textUpdName.Text != null && textUpdName.Text != "")
+                {
+                    myComand.Parameters.AddWithValue("@name", textUpdName.Text);
+                }
+                else
+                {
+                    throw new Exception("Nombre no puede estar vacio");
+                }
 
-            myComand.ExecuteNonQuery();
+                myComand.Parameters.AddWithValue("@price", textUpdPrice.Text);
+                myComand.Parameters.AddWithValue("@amount", textUpdAmount.Text);
 
-            myConnectionSql.Close();
+                myComand.ExecuteNonQuery();
 
-            this.Close();
+                
+
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                myConnectionSql.Close();
+            }
         }
     }
 }

@@ -128,35 +128,47 @@ namespace FirstCrudProduct
         //actualizar
         private void updateBtn_Click(object sender, RoutedEventArgs e)
         {
-            updateWindow updateWindow = new updateWindow((int)productList.SelectedValue);
-
             try
             {
-                string consult = "SELECT Name,Price,Amount FROM Products WHERE ID=@p";
-
-                SqlCommand myComand = new SqlCommand(consult,myConnectionSql);
-
-                SqlDataAdapter adapterSql = new SqlDataAdapter(myComand);
-
-                using(adapterSql)
+                if (productList.SelectedValue != null)
                 {
-                    myComand.Parameters.AddWithValue("@p",productList.SelectedValue);
 
-                    DataTable productTable = new DataTable();
+                    updateWindow updateWindow = new updateWindow((int)productList.SelectedValue);
 
-                    adapterSql.Fill(productTable);
 
-                    updateWindow.textUpdName.Text = productTable.Rows[0]["Name"].ToString();
-                    updateWindow.textUpdPrice.Text = productTable.Rows[0]["Price"].ToString();
-                    updateWindow.textUpdAmount.Text = productTable.Rows[0]["Amount"].ToString();
+                    string consult = "SELECT Name,Price,Amount FROM Products WHERE ID=@p";
+
+                    SqlCommand myComand = new SqlCommand(consult, myConnectionSql);
+
+                    SqlDataAdapter adapterSql = new SqlDataAdapter(myComand);
+
+                    using (adapterSql)
+                    {
+                        myComand.Parameters.AddWithValue("@p", productList.SelectedValue);
+
+                        DataTable productTable = new DataTable();
+
+                        adapterSql.Fill(productTable);
+
+                        updateWindow.textUpdName.Text = productTable.Rows[0]["Name"].ToString();
+                        updateWindow.textUpdPrice.Text = productTable.Rows[0]["Price"].ToString();
+                        updateWindow.textUpdAmount.Text = productTable.Rows[0]["Amount"].ToString();
+                    }
+
+
+
+                    updateWindow.ShowDialog();
                 }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+                else
+                {
+                    throw new Exception("Debe seleccionar un elemento para poder actualizar");
+                }
 
-            updateWindow.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
             ShowProduct();
            showProductList.ItemsSource = null; 
