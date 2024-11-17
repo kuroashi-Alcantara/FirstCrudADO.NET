@@ -178,23 +178,44 @@ namespace FirstCrudProduct
         //eliminar
         private void deleteBtn_Click(object sender, RoutedEventArgs e)
         {
-            string consult = "DELETE FROM products WHERE ID=@p";
+            try
+            {
 
-            SqlCommand myComand = new SqlCommand(consult,myConnectionSql);
+
+                string consult = "DELETE FROM products WHERE ID=@p";
+
+                SqlCommand myComand = new SqlCommand(consult, myConnectionSql);
 
 
-            myConnectionSql.Open();
+                myConnectionSql.Open();
 
-            myComand.Parameters.AddWithValue("@p", productList.SelectedValue);
+                if (productList.SelectedValue != null)
+                {
+                    myComand.Parameters.AddWithValue("@p", productList.SelectedValue);
+                }
+                else
+                {
+                    throw new Exception("Debe seleccionar un elemento para eliminar");
+                }
 
-            myComand.ExecuteNonQuery();
 
-            myConnectionSql.Close();
+                myComand.ExecuteNonQuery();
 
-            ShowProduct();
+                
 
-            showProductList.ItemsSource = null; 
-            showProductList2.ItemsSource = null;
+                ShowProduct();
+
+                showProductList.ItemsSource = null;
+                showProductList2.ItemsSource = null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                myConnectionSql.Close();
+            }
         }
     }
 }
