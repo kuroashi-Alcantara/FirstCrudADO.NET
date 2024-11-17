@@ -5,18 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FirstCrudProduct"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid Background="AntiqueWhite">
+        Title="MainWindow" Height="455" Width="600">
+    <Grid Background="AliceBlue">
+
 
         <Label x:Name="label" FontSize="25" Content="Productos" HorizontalAlignment="Left" Margin="62,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <ListBox x:Name="productList" Margin="39,73,585,115" RenderTransformOrigin="0.514,0.524"  MouseDoubleClick="productList_MouseDoubleClick"/>
+        <ListBox x:Name="productList" Height="265" Width="176" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="39,58,0,0" RenderTransformOrigin="0.514,0.524"  MouseDoubleClick="productList_MouseDoubleClick"/>
+
 
         <Button x:Name="addBtn" Content="Agregar" HorizontalAlignment="Left" Margin="39,332,0,0" VerticalAlignment="Top" Height="35" Width="54" Click="addBtn_Click"/>
         <Button x:Name="updateBtn" Content="Actualizar" HorizontalAlignment="Left" Margin="100,332,0,0" VerticalAlignment="Top" Height="35" Width="54" Click="updateBtn_Click"/>
         <Button x:Name="deleteBtn" Content="Eliminar" HorizontalAlignment="Left" Margin="161,332,0,0" VerticalAlignment="Top" Height="35" Width="54" Click="deleteBtn_Click"/>
 
-        <ListBox x:Name="showProductList" Background="WhiteSmoke"  Margin="290,106,220,217"/>
-        <ListBox x:Name="showProductList2" Background="WhiteSmoke"  Margin="290,269,220,58"/>
+        <ListBox x:Name="showProductList"  Height="110" Width="206" HorizontalAlignment="Left" VerticalAlignment="Top" Background="White"  Margin="290,106,0,0"/>
+        <ListBox x:Name="showProductList2" Height="110" Width="206" HorizontalAlignment="Left" VerticalAlignment="Top" Background="White"  Margin="290,269,0,0"/>
 
         <Label x:Name="label1" Content="Precio" HorizontalAlignment="Left" Margin="344,53,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="22"/>
         <Label x:Name="label1_Copy" Content="Cantidad" HorizontalAlignment="Left" Margin="331,222,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="22"/>
